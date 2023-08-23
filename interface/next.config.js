@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	images: {
+		domains: ["cdn.imagin.studio"]
+	},
 	webpack: (config) => {
 		let modularizeImports = null;
 		config.module.rules.some((rule) =>

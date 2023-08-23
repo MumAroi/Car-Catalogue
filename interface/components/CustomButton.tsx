@@ -6,7 +6,7 @@ import Image from "next/image";
 const CustomButton = ({
 	title,
 	containerStyles,
-	textStyle,
+	textStyles,
 	handleClick,
 	btnType,
 	rightIcon,
@@ -17,9 +17,9 @@ const CustomButton = ({
 			disabled={isDisabled || false}
 			type={btnType || "button"}
 			className={`custom-btn ${containerStyles}`}
-			onClick={() => handleClick}
+			onClick={handleClick}
 		>
-			<span className={`flex-1 ${textStyle}`}>
+			<span className={`flex-1 ${textStyles}`}>
 				{title}
       </span>
       {rightIcon && (

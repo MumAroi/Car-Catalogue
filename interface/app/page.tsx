@@ -1,10 +1,12 @@
 import { CarCard, CustomFilter, Hero, SearchBar } from "@/components";
-import Image from "next/image";
 import { fetchCars } from "@/utils";
+import { CarProps } from "@/types";
+
 
 export default async function Home() {
 	const allCars = await fetchCars();
-	const isDataEmpty = !Array.isArray(allCars || allCars.lang < 1 || !allCars);
+	const isDataEmpty = !Array.isArray(allCars || allCars.length < 1 || !allCars);
+
 	return (
 		<main className="overflow-hidden">
 			<Hero />
@@ -24,8 +26,8 @@ export default async function Home() {
 				{!isDataEmpty ? (
 					<section>
 						<div className="home__cars-wrapper">
-							{allCars?.map((car) => (
-								<CarCard car={car} />
+							{allCars?.map((car: CarProps) => (
+								<CarCard car={car} key={`${car.make}-${car.model}-${car.combination_mpg}-${car.highway_mpg}-${car.transmission}`} />
 							))}
 						</div>
 					</section>
