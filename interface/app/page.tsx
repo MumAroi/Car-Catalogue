@@ -1,6 +1,7 @@
 import { CarCard, CustomFilter, Hero, SearchBar } from "@/components";
 import { fetchCars } from "@/utils";
 import { CarProps, FilterProps } from "@/types";
+import { fuels, yearsOfProduction } from "@/constants";
 
 export default async function Home({ searchParams }: { searchParams: FilterProps}) {
 	const allCars = await fetchCars({
@@ -10,7 +11,8 @@ export default async function Home({ searchParams }: { searchParams: FilterProps
 		limit: searchParams.limit || 10,
 		model: searchParams.model || "",
 	});
-	const isDataEmpty = !Array.isArray(allCars || allCars.length < 1 || !allCars);
+	const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+	console.log(isDataEmpty);
 
 	return (
 		<main className="overflow-hidden">
@@ -24,8 +26,8 @@ export default async function Home({ searchParams }: { searchParams: FilterProps
 				<div className="home__filters">
 					<SearchBar />
 					<div className="home__filter-container">
-						<CustomFilter />
-						<CustomFilter />
+						<CustomFilter title="fuel" options={fuels} />
+						<CustomFilter title="year" options={yearsOfProduction}/>
 					</div>
 				</div>
 				{!isDataEmpty ? (
